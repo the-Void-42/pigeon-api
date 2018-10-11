@@ -10,9 +10,14 @@ const app = express()
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-//TODO set up and configure database
+const db = require('./config/keys.js').mongoURI
 
-//TODO connect through mongoose
+//connect to mongoDB through mongoose
+mongoose.connect(db)
+.then(() => console.log('MongoDB Connected'))
+.catch(err => console.log(err))
+
+app.get('/', (req, res) => res.send('hi'))
 
 app.use(passport.initialize())
 
