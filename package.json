@@ -1,0 +1,29 @@
+{
+  "name": "pigeon-api",
+  "version": "1.0.0",
+  "description": "a clone based on twitter",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-Void-42/pigeon-api.git"
+  },
+  "author": "Ashley Ratigan, Elizabeth Brigham, Aleksandra Sarnicka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-Void-42/pigeon-api/issues"
+  },
+  "homepage": "https://github.com/the-Void-42/pigeon-api#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.3.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
+  }
+}
