@@ -5,6 +5,9 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 
+const user = require('./routes/user.js')
+const tweet = require('./routes/tweet.js')
+
 const app = express()
 
 // bodyParser parses incoming requests before they hit routes/handlers. Allows access to req.body
@@ -31,6 +34,9 @@ app.use(passport.initialize())
 //allows it access to incoming requests
 
 //TODO: set up authentication strategy
+
+app.use('/users', user)
+app.use('/tweets', tweet)
 
 const port = process.env.PORT || 5000
 
