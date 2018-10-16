@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
+const Validator = require('validator')
+
 const User = require('../models/User')
+const { BadEmailParamsError, BadPasswordParamsError } = require('../lib/custom-errors')
 
 // @route   GET /users/test
 // @desc    tests GET route
@@ -12,7 +15,18 @@ router.get('/test', (req, res) => res.json('testworks'))
 // @desc    register user POST route
 // @access  Public/unauthenticated
 router.post('/register', (req, res) => {
-// TODO: Validation strategy for user input
+
+if(Validator.isEmail(req.body.email) === false) {
+  const emailError = new BadEmailParamsError()
+  return res.status(400).json(emailError)
+}
+
+if(!req.body.password ||
+    req.body.password.length < 3) {
+  const passwordError = new BadPasswordParamsError()
+  return res.status(400).json(passwordError)
+}
+
 
 User.findOne({ email: req.body.email })
 .then(user => {
