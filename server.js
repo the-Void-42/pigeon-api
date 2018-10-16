@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 
-const user = require('./routes/user.js')
+const users = require('./routes/user.js')
 const tweet = require('./routes/tweet.js')
 
 const app = express()
@@ -35,7 +35,7 @@ app.use(passport.initialize())
 
 //TODO: set up authentication strategy
 
-app.use('/users', user)
+app.use('/users', users)
 app.use('/tweets', tweet)
 
 const port = process.env.PORT || 5000
