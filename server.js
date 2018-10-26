@@ -33,7 +33,12 @@ app.use(passport.initialize())
 //initialize the passport authentication module
 //allows it access to incoming requests
 
-//TODO: set up authentication strategy
+require('./config/passport')(passport)
+//passing 'passport' module to the passport.js file
+//passport.js will define the authentication startegy for handling the token.
+//this step is essentially 'registering' our auth middleware with passport as the jwt strategy we want to use
+//strategy is itself a custom middleware - all requests to protected endpoints will pass through this middleware
+//the token will be checked and verified before the route is hit & request allowed
 
 app.use('/users', users)
 app.use('/tweets', tweet)
