@@ -3,7 +3,7 @@ const {Schema} = mongoose
 
 const TweetSchema = new Schema({
     user: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
     date: {
@@ -16,4 +16,4 @@ const TweetSchema = new Schema({
     }
 })
 
-module.exports = Tweet = mongoose.model('Tweet', TweetSchema) 
+module.exports = Tweet = mongoose.model('tweets', TweetSchema) 

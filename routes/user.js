@@ -8,7 +8,7 @@ const passport = require('passport')
 
 const User = require('../models/User')
 const { BadEmailParamsError, BadPasswordParamsError } = require('../lib/custom-errors')
-const { requireToken } = require('../config/passport')
+// const { requireToken } = require('../config/passport')
 
 // @route   GET /users/test
 // @desc    tests GET route

@@ -15,6 +15,8 @@ const keys = require('../config/keys')
 // it checks to see if the users token exists - if so - they are allowed to access that route.
 
 module.exports = (passport) => {
+  // this module is exporting a function
+  // the return value is either the success or failure of the strategy
 passport.use(new JwtStrategy({
   //takes 2 arguments:
   //arg 1: an object literal that contains the extracted token and secret
@@ -31,8 +33,10 @@ passport.use(new JwtStrategy({
   User.findById(jwt_payload.id)
   .then(user => {
     if(user) {
+      // console.log(doneCallBack(null, user))
       return doneCallBack(null, user)
     }
+    // console.log(doneCallBack(null, user))
     return doneCallBack(null, false)
   })
   .catch(err => console.log(err))

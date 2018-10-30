@@ -32,10 +32,13 @@ app.get('/', (req, res) => res.send('hi'))
 app.use(passport.initialize())
 //initialize the passport authentication module
 //allows it access to incoming requests
+// adds a passport instance to the incoming requests
 
 require('./config/passport')(passport)
-//passing 'passport' module to the passport.js file
-//passport.js will define the authentication startegy for handling the token.
+//this is an example of currying/partial application
+// invoking the require() function returns the module.exports object specified by the path supplied - in this case - module.exports returns a function - we are passing 'passport' as a paramater to that function
+
+//passport.js defines the authentication startegy for handling the token.
 //this step is essentially 'registering' our auth middleware with passport as the jwt strategy we want to use
 //strategy is itself a custom middleware - all requests to protected endpoints will pass through this middleware
 //the token will be checked and verified before the route is hit & request allowed
