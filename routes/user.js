@@ -4,9 +4,11 @@ const bcrypt = require('bcryptjs')
 const Validator = require('validator')
 const jwt = require('jsonwebtoken')
 const keys = require('../config/keys')
+const passport = require('passport')
 
 const User = require('../models/User')
 const { BadEmailParamsError, BadPasswordParamsError } = require('../lib/custom-errors')
+// const { requireToken } = require('../config/passport')
 
 // @route   GET /users/test
 // @desc    tests GET route
@@ -57,7 +59,7 @@ router.post('/register', (req, res) => {
   .catch(err => console.log(err))
 })
 
-router.post('/login', (req, res) => { 
+router.post('/login', (req, res) => {
 
   // check to see if valid email
   if(Validator.isEmail(req.body.email) === false) {
@@ -108,5 +110,20 @@ router.post('/login', (req, res) => {
     })
   })
 })
+
+// @route   GET api/users/current
+// @desc    return current user
+// @access  Private
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+  //passport.authenticate takes the strategy thats to be used as the first param and applies it to that route - route is now protected
+  // the supplied callback is used if the authentication strategy passed successfully - req.user will contain the authenticated users
+  // by default if authentication strategy fails - 401 Unauthorized status returned
+  res.json({
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email
+  })
+})
+
 
 module.exports = router
