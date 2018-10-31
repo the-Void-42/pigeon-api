@@ -41,7 +41,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), (req, res) => 
   router.get('/own', passport.authenticate('jwt', { session: false}), (req, res) => {
     //   console.log(req)
 
-    Tweet.find({ user: req.user._id}).populate('itemReference')
+    Tweet.find({ user: req.user._id}).populate('user')
       .then(tweets => {
         //   console.log(tweets)
         // `tweets` will be an array of Mongoose documents
@@ -61,6 +61,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), (req, res) => 
 // @access  Private
 // TODO check that user actually owns the tweet to be deleted
 router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+  
     Tweet.findById(req.params.id)
     // find the tweet by id
     .then(tweet => {
@@ -73,6 +74,32 @@ router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res)
 
 
   //update tweet?
+  // UPDATE
+// PATCH /tweets/:id
+router.patch('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+  console.log(req.body)
+  // Tweet.findById(req.params.id)
+  //   .then(tweet => {
+   
+  //     //TODO check ownership of tweet tweet user must match req.body.user
+
+  //     // the client will often send empty strings for parameters that it does
+  //     // not want to update. We delete any key/value pair where the value is
+  //     // an empty string before updating
+  //     Object.keys(req.body.tweet).forEach(key => {
+  //       if (req.body.wine[key] === '') {
+  //         delete req.body.wine[key]
+  //       }
+  //     })
+
+  //     // pass the result of Mongoose's `.update` to the next `.then`
+  //     return wine.update(req.body.wine)
+  //   })
+  //   // if that succeeded, return 204 and no JSON
+  //   .then(() => res.sendStatus(204))
+  //   // if an error occurs, pass it to the handler
+  //   .catch(err => handle(err, res))
+})
 
 
 
