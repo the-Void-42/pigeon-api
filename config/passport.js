@@ -4,7 +4,9 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 // allows extraction of the payload/user data from the request
 // const passport = require('passport')
 const mongoose = require('mongoose')
-const User = mongoose.model('users')
+
+const User = mongoose.model('User')
+
 // 'users' comes from the module.exports syntax of the User Schema
 const keys = require('../config/keys')
 
