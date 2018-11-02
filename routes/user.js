@@ -7,7 +7,7 @@ const keys = require('../config/keys')
 const passport = require('passport')
 
 const User = require('../models/User')
-const { BadEmailParamsError, BadPasswordParamsError } = require('../lib/custom-errors')
+const { BadEmailParamsError, BadPasswordParamsError, UserAlreadyExistsError } = require('../lib/custom-errors')
 // const { requireToken } = require('../config/passport')
 
 // @route   GET /users/test
@@ -36,6 +36,7 @@ router.post('/register', (req, res) => {
   .then(user => {
     if(user) {
       console.log('user already exists')
+      return res.status(400).json(new UserAlreadyExistsError())
     } else {
       //create new instance of User model:
       const newUser = new User({
